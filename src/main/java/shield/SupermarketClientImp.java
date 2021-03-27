@@ -9,10 +9,10 @@ import java.io.IOException;
 public class SupermarketClientImp implements SupermarketClient {
 
   // fields of the supermarket client
-  String endpoint;
-  String name;
-  String postCode;
-  boolean isRegistered = false;
+  private String endpoint;
+  private String name;
+  private String postCode;
+  private boolean isRegistered = false;
 
   /**
    * Constructor for the supermarket class.

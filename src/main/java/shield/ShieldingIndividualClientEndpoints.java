@@ -26,7 +26,7 @@ public interface ShieldingIndividualClientEndpoints {
   /**
   * Returns collection of food box ids if the operation occurred correctly
   *
-  * @param dietary preference
+  * @param dietaryPreference dietary preference of shielding individual
   * @return collection of food box ids
   */
   public Collection<String> showFoodBoxes(String dietaryPreference);

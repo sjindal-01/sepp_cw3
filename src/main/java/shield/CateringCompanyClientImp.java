@@ -10,10 +10,10 @@ import java.io.IOException;
 public class CateringCompanyClientImp implements CateringCompanyClient {
 
   // fields of the catering company client
-  String endpoint;
-  String name;
-  String postCode;
-  boolean isRegistered = false;
+  private String endpoint;
+  private String name;
+  private String postCode;
+  private boolean isRegistered = false;
 
 
   public CateringCompanyClientImp(String endpoint) {
