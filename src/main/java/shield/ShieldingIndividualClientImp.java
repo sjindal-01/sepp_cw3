@@ -4,15 +4,55 @@
 
 package shield;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.time.LocalDateTime;
 
 public class ShieldingIndividualClientImp implements ShieldingIndividualClient {
+
+  /**
+   * The string representation of the base server endpoint (a HTTP address)
+   */
+  private String endpoint;
+
+  /**
+   * Details of the shielding individual
+   */
+  private String CHI;
+  private boolean isRegistered = false;
+
+  /**
+   * Constructor for the Shielding Individual Class.
+   *
+   * @param endpoint the base server endpoint
+   */
   public ShieldingIndividualClientImp(String endpoint) {
+    this.endpoint = endpoint;
+
   }
 
+  /**
+   * Registers a shielding individual and returns true if operation occurred correctly.
+   *
+   * @param CHI CHI number of the individual
+   * @return true or false depending on success of registration
+   */
   @Override
   public boolean registerShieldingIndividual(String CHI) {
+    assert CHI != null;
+    String request = "registerShieldingIndividual?CHI=" + CHI;
+
+    try{
+      String response = ClientIO.doGETRequest(this.endpoint + request);
+      if (response.equals("registered new") || response.equals("already registered")) {
+        this.CHI = CHI;
+        this.isRegistered = true;
+        return true;
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+
+    }
     return false;
   }
 

@@ -8,8 +8,13 @@ import java.io.IOException;
 
 public class SupermarketClientImp implements SupermarketClient {
 
-  // fields of the supermarket client
+  /**
+   * The string representation of the base server endpoint (a HTTP address).
+   */
   private String endpoint;
+  /**
+   * The details of the supermarket.
+   */
   private String name;
   private String postCode;
   private boolean isRegistered = false;
@@ -40,7 +45,7 @@ public class SupermarketClientImp implements SupermarketClient {
             "registerSupermarket?business_name=" + name + "&postcode=" + postCode;
 
     try {
-      String response = ClientIO.doGETRequest(endpoint + request);
+      String response = ClientIO.doGETRequest(this.endpoint + request);
       if (response.equals("registered new") || response.equals("already registered")) {
         this.name = name;
         this.isRegistered = true;
@@ -68,11 +73,10 @@ public class SupermarketClientImp implements SupermarketClient {
   public boolean updateOrderStatus(int orderNumber, String status) {
     assert status != null;
 
-    String updateOrderstatusEndpoint =
-            this.endpoint + "updateOrderStatus?orderID=" + orderNumber + "&newStatus=" + status;
+    String request = this.endpoint + "updateOrderStatus?orderID=" + orderNumber + "&newStatus=" + status;
 
     try {
-      String response = ClientIO.doGETRequest(updateOrderstatusEndpoint);
+      String response = ClientIO.doGETRequest(this.endpoint + request);
       if (response.equals("True")) {
         return true;
       }

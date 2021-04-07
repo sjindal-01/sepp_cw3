@@ -9,13 +9,22 @@ import java.io.IOException;
 
 public class CateringCompanyClientImp implements CateringCompanyClient {
 
-  // fields of the catering company client
+  /**
+   * The string representation of the base server endpoint (a HTTP address)
+   */
   private String endpoint;
+  /**
+   * Details of the catering company
+   */
   private String name;
   private String postCode;
   private boolean isRegistered = false;
 
-
+  /**
+   * Constructor for the Catering Company Class.
+   *
+   * @param endpoint the base server endpoint
+   */
   public CateringCompanyClientImp(String endpoint) {
     assert endpoint != null;
     this.endpoint = endpoint;
@@ -64,18 +73,16 @@ public class CateringCompanyClientImp implements CateringCompanyClient {
   public boolean updateOrderStatus(int orderNumber, String status) {
     assert status != null;
 
-    String updateOrderstatusEndpoint =
-            this.endpoint + "updateOrderStatus?orderID=" + orderNumber + "&newStatus=" + status;
+    String request = "updateOrderStatus?orderID=" + orderNumber + "&newStatus=" + status;
 
     try {
-      String response = ClientIO.doGETRequest(updateOrderstatusEndpoint);
+      String response = ClientIO.doGETRequest(this.endpoint + request);
       if (response.equals("True")) {
         return true;
       }
 
     } catch (IOException e) {
       e.printStackTrace();
-      return false;
     }
 
     return false;
